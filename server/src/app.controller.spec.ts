@@ -1,22 +1,24 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { GithubService } from './providers/github/github.service';
+import { ProvidersModule } from './providers/providers.module';
 
 describe('AppController', () => {
   let appController: AppController;
 
   beforeEach(async () => {
     const app: TestingModule = await Test.createTestingModule({
+      imports: [ProvidersModule],
       controllers: [AppController],
-      providers: [AppService],
+      providers: [GithubService],
     }).compile();
 
     appController = app.get<AppController>(AppController);
   });
 
   describe('root', () => {
-    it('should return "Hello World!"', () => {
-      expect(appController.getHello()).toBe('Hello World!');
+    it('should return Object', async () => {
+      expect(await appController.getGithub()).toHaveProperty('commitsArray');
     });
   });
 });
