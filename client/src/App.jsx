@@ -1,10 +1,10 @@
+import Commits from './components/Commits'
 
 
 function App() {
-
   return (
     <>
-      <h1>github-commits-test</h1>
+      <Commits />
     </>
   )
 }
